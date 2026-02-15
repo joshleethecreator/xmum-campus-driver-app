@@ -7,7 +7,12 @@
 .buildlog/
 .history
 
-
+# IDEs and Editors
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
 
 # Flutter repo-specific
 /bin/cache/
