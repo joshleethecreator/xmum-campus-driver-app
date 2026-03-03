@@ -12,6 +12,41 @@ For a UX-focused feature and screen summary, see `docs/FEATURES_UX.md`.
 
 ---
 
+## Table of Contents
+
+- [1. Product Summary](#1-product-summary)
+- [2. Roles / Personas](#2-roles--personas)
+  - [2.1 Passenger](#21-passenger)
+  - [2.2 Driver](#22-driver)
+  - [2.3 Admin / Reviewer (Implied)](#23-admin--reviewer-implied)
+- [3. Screen Inventory (User-facing)](#3-screen-inventory-user-facing)
+  - [3.1 Authentication](#31-authentication)
+  - [3.2 Passenger Screens](#32-passenger-screens)
+  - [3.3 Driver Screens](#33-driver-screens)
+  - [3.4 Shared / System Behaviors](#34-shared--system-behaviors)
+- [4. Core User Journeys](#4-core-user-journeys)
+  - [4.1 Passenger Journey — Request Ride to Completion](#41-passenger-journey--request-ride-to-completion)
+  - [4.2 Driver Journey — Browse, Accept, Complete](#42-driver-journey--browse-accept-complete)
+  - [4.3 Passenger Journey — Scheduled Ride](#43-passenger-journey--scheduled-ride)
+- [5. Feature List (User-visible Behavior)](#5-feature-list-user-visible-behavior)
+  - [5.1 Accounts & Authentication](#51-accounts--authentication)
+  - [5.2 Driver Verification](#52-driver-verification)
+  - [5.3 Location Search](#53-location-search)
+  - [5.4 Ride Lifecycle & State-driven UI](#54-ride-lifecycle--state-driven-ui)
+  - [5.5 Driver “Available Rides” & Accept Flow](#55-driver-available-rides--accept-flow)
+  - [5.6 Real-time Chat](#56-real-time-chat)
+  - [5.7 Push Notifications](#57-push-notifications)
+  - [5.8 Scheduled Rides](#58-scheduled-rides)
+- [6. Constraints & Automation (Impacting UX)](#6-constraints--automation-impacting-ux)
+  - [6.1 Chat Retention](#61-chat-retention)
+  - [6.2 Time-based Ride Automation](#62-time-based-ride-automation)
+  - [6.3 Offline / Poor Network Behavior](#63-offline--poor-network-behavior)
+- [7. Error Handling (From a UX Perspective)](#7-error-handling-from-a-ux-perspective)
+- [8. Glossary / Ubiquitous language](#8-glossary--ubiquitous-language)
+- [9. Open Questions / TBD](#9-open-questions--tbd)
+
+---
+
 ## 1. Product Summary
 
 - A campus ride-request app with **two primary roles**: **Passenger** and **Driver**.
@@ -175,6 +210,8 @@ For a UX-focused feature and screen summary, see `docs/FEATURES_UX.md`.
 
 ### 5.4 Ride Lifecycle & State-driven UI
 
+Domain terms are **immediate ride** and **scheduled ride**; in the UI we use **Ride now** and **Schedule for later** (see [§8 Glossary](#8-glossary--ubiquitous-language)).
+
 - Rides have states:
 - For **immediate rides**:
   - `pending`
@@ -277,7 +314,21 @@ For a UX-focused feature and screen summary, see `docs/FEATURES_UX.md`.
 
 ---
 
-## 8. Open Questions / TBD
+## 8. Glossary / Ubiquitous language
+
+Terms used consistently across docs, API, and UI:
+
+| Layer                   | Request ride now       | Request ride for later   |
+| ----------------------- | ---------------------- | ------------------------ |
+| **Domain / API / code** | **immediate ride**     | **scheduled ride**       |
+| **UI label**            | **Ride now**           | **Schedule for later**   |
+
+- **Immediate ride** — A ride requested for pickup as soon as possible. In the UI, offered as **Ride now**. Backend: no `scheduledPickupAt` or “now”; state is **pending** immediately.
+- **Scheduled ride** — A ride requested for a specific future pickup time. In the UI, offered as **Schedule for later**. Backend: `scheduledPickupAt` in the future; state is **scheduled** until that time, then **pending**.
+
+---
+
+## 9. Open Questions / TBD
 
 - Detailed onboarding fields for passengers and drivers.
 - Exact restrictions for drivers while `verification_status = pending`.
